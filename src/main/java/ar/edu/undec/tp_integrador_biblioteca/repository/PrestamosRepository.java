@@ -1,0 +1,14 @@
+package ar.edu.undec.tp_integrador_biblioteca.repository;
+
+import ar.edu.undec.tp_integrador_biblioteca.entity.Prestamos;
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface PrestamosRepository extends JpaRepository<Prestamos, Long> {
+    @EntityGraph(attributePaths = {"libro"})
+    List<Prestamos> findAllBySocioId(Long socioId);
+}

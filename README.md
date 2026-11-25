@@ -21,11 +21,11 @@ Consola H2: `http://localhost:8080/h2-console`.
 
 ## Modelo
 
-| Entidad  | Atributos principales                              | Relaciones                        |
-|----------|----------------------------------------------------|-----------------------------------|
-| libro    | id, titulo, autor, isbn                            | 1 a 1 con prestamo                |
-| socio    | id, nombre, email                                  | 1 a N con prestamo                |
-| prestamo | id, libroId, socioId, fechaDevolucion, estado | N a 1 con socio y 1 a 1 con libro |
+| Entidad  | Atributos principales                     | Relaciones                       |
+|----------|-------------------------------------------|----------------------------------|
+| libro    | id, titulo, autor, isbn                   | 1 a N con prestamo               |
+| socio    | id, nombre, email                         | 1 a N con prestamo               |
+| prestamo | id, libro, socio, fechaDevolucion, estado | N a 1 con socio y con libro |
 
 Estados del préstamo: `ACTIVO → DEVUELTO | VENCIDO` · `VENCIDO → DEVUELTO` · `DEVUELTO` es final.
 
@@ -44,17 +44,18 @@ Estados del préstamo: `ACTIVO → DEVUELTO | VENCIDO` · `VENCIDO → DEVUELTO`
 
 ### Socios
 | Método | Ruta                       | Descripción                       | Respuestas |
-|---|----------------------------|-----------------------------------|---|
-| GET | /api/socios               | Listar socios                     | 200 |
-| GET | /api/socios/{id}          | Buscar un socio por id            | 200, 404 |
-| POST | /api/socios               | Crear un socio                    | 201, 400, 404, 409 |
-| PATCH | /api/socios/{id}/prestamos | Consultar los prestamos del socio | 200, 400, 404 |
+|--------|----------------------------|-----------------------------------|---|
+| GET    | /api/socios               | Listar socios                     | 200 |
+| GET    | /api/socios/{id}          | Buscar un socio por id            | 200, 404 |
+| POST   | /api/socios               | Crear un socio                    | 201, 400, 404, 409 |
+| GET    | /api/socios/{id}/prestamos | Consultar los prestamos del socio | 200, 400, 404 |
 
 ### Prestamos
 | Método | Ruta                            | Descripción                                                               | Respuestas |
 |--------|---------------------------------|---------------------------------------------------------------------------|---|
 | POST   | /api/prestamos                  | Registrar el prestamo de un libro                                         | 200, 400, 404, 409 |
 | GET    | /api/prestamos                  | Obtener prestamos activos y vencidos                                      | 200 |
+| GET    | /api/prestamos?estado=ACTIVO    | Filtrar prestamos por estado activo                                       | 200 |
 | GET    | /api/prestamos/{id}             | Buscar un prestamo                                                        | 200, 400, 404 |
 | PATCH  | /api/prestamos/{id}/estado      | Cambiar el estado                                                         | 200, 400, 404, 409 |
 | PATCH  | /api/prestamos/{id}/renovar     | Sumar 7 dias a la fecha de devolucion solo por unica vez y si esta activo | 200, 400, 404, 409 |
