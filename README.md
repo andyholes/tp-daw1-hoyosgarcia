@@ -32,15 +32,15 @@ Estados del préstamo: `ACTIVO → DEVUELTO | VENCIDO` · `VENCIDO → DEVUELTO`
 ## Endpoints
 
 ### Libros
-| Método | Ruta                        | Descripción                                                | Respuestas |
-|---|-----------------------------|------------------------------------------------------------|---|
+| Método | Ruta                        | Descripción                                                | Respuestas         |
+|---|-----------------------------|------------------------------------------------------------|--------------------|
 | POST | /api/libros                 | Registrar un libro                                         | 201, 400, 404, 409 |
 | PUT | /api/libros/{id}            | Modificar un libro                                         | 200, 400, 404, 409 |
-| DELETE | /api/libros/{id}            | Borrar un libro                                            | 204, 404, 409 |
-| GET | /api/libros                 | Listar libros                                              | 200 |
-| GET | /api/libros/{id}            | Buscar un libro por id                                     | 200, 404 |
-| GET | /api/libros?disponible=true | Listar libros disponibles para prestar                     | 200 |
-| GET | /api/libros/mas-prestados?top=5  | Obtener libros con más préstamos y la cantidad de cada uno | 200, 404 |
+| DELETE | /api/libros/{id}            | Borrar un libro                                            | 204, 404, 409      |
+| GET | /api/libros                 | Listar libros                                              | 200                |
+| GET | /api/libros/{id}            | Buscar un libro por id                                     | 200, 400, 404      |
+| GET | /api/libros?disponible=true | Listar libros disponibles para prestar                     | 200                |
+| GET | /api/libros/mas-prestados?top=5  | Obtener libros con más préstamos y la cantidad de cada uno | 200         |
 
 ### Socios
 | Método | Ruta                       | Descripción                       | Respuestas |
@@ -70,7 +70,7 @@ Estados del préstamo: `ACTIVO → DEVUELTO | VENCIDO` · `VENCIDO → DEVUELTO`
 ```json
 //completar
 ```
-3No puede haber dos libros con el mismo ISBN.
+3. No puede haber dos libros con el mismo ISBN.
 ```json
 //completar
 ```
