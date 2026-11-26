@@ -9,12 +9,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@SQLDelete(sql = "UPDATE libros SET deleted = true WHERE id = ?")
+@SQLRestriction("deleted = false")
 public class Libros {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -28,4 +32,6 @@ public class Libros {
 
     @Column(nullable = false, unique = true)
     private String isbn;
+
+    private boolean deleted = false;
 }

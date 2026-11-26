@@ -6,6 +6,7 @@ import ar.edu.undec.tp_integrador_biblioteca.entity.Libros;
 import ar.edu.undec.tp_integrador_biblioteca.exception.ConflictException;
 import ar.edu.undec.tp_integrador_biblioteca.exception.ResourceNotFoundException;
 import ar.edu.undec.tp_integrador_biblioteca.repository.LibrosRepository;
+import ar.edu.undec.tp_integrador_biblioteca.repository.PrestamosRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import static ar.edu.undec.tp_integrador_biblioteca.service.PrestamosService.EST
 @RequiredArgsConstructor
 public class LibrosService {
     private final LibrosRepository librosRepository;
+    private final PrestamosRepository prestamosRepository;
 
     public List<LibrosResponse> getAll(boolean disponible) {
         List<Libros> libros = disponible
@@ -34,6 +36,9 @@ public class LibrosService {
     }
 
     public void deleteById(Long id) {
+        if (prestamosRepository.existsByLibroIdAndEstadoIn(id, ESTADOS_NO_FINALES)) {
+            throw new ConflictException("No se puede borrar un libro con un prestamo activo");
+        }
         librosRepository.delete(findById(id));
     }
 
