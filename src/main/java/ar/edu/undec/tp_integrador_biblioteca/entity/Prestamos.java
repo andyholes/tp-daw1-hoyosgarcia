@@ -24,8 +24,8 @@ public class Prestamos {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "socio_id", nullable = false)
     private Socios socio;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "libro_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "libro_id")
     private Libros libro;
     private Estado estado;
     @NotNull
