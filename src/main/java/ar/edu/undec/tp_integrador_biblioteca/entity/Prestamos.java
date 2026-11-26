@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -21,7 +22,7 @@ import java.time.LocalDate;
 @Builder
 public class Prestamos {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "socio_id", nullable = false)
@@ -30,5 +31,7 @@ public class Prestamos {
     @JoinColumn(name = "libro_id", nullable = false)
     private Libros libro;
     private LocalDate fechaDevolucion;
+    private LocalDate fechaRealDevolucion;
+    private BigDecimal multa;
     private Estado estado = Estado.ACTIVO;
 }

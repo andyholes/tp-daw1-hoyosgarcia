@@ -8,9 +8,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class SociosRequest {
-    @NotBlank(message = "No debe estar vacio")
+    @NotBlank(message = "no debe estar vacio")
     private String nombre;
     @Email
-    @NotBlank(message = "No debe estar vacio")
+    @NotBlank(message = "no debe estar vacio")
     private String email;
 }

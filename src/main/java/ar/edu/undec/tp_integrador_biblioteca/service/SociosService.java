@@ -25,7 +25,7 @@ public class SociosService {
     public SociosResponse getById(Long id) {
         return mapToDto(sociosRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        String.format("Socio con ID %s no encontrado", id)
+                        String.format("Socio con id %s no encontrado", id)
                 ))
         );
     }

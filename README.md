@@ -65,15 +65,27 @@ Estados del préstamo: `ACTIVO → DEVUELTO | VENCIDO` · `VENCIDO → DEVUELTO`
 
 1. Un libro con un préstamo no devuelto no se puede volver a prestar.
 ```json
-//completar
+{
+  "status": 409,
+  "title": "Conflicto interno",
+  "detail": "El libro esta en prestamo y aun no fue devuelto"
+}
 ```
 2. Un socio puede tener como máximo 3 préstamos no devueltos.
 ```json
-//completar
+{
+  "status": 409,
+  "title": "Conflicto interno",
+  "detail": "El socio alcanzo limite de 3 prestamos activos"
+}
 ```
 3. No puede haber dos libros con el mismo ISBN.
 ```json
-//completar
+{
+  "status": 409,
+  "title": "Conflicto interno",
+  "detail": "El ISBN informado ya esta en uso por otro libro"
+}
 ```
 
 ## Pruebas
