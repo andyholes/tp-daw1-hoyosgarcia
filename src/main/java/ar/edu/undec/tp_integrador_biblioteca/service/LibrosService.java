@@ -2,7 +2,6 @@ package ar.edu.undec.tp_integrador_biblioteca.service;
 
 import ar.edu.undec.tp_integrador_biblioteca.dto.LibrosRequest;
 import ar.edu.undec.tp_integrador_biblioteca.dto.LibrosResponse;
-import ar.edu.undec.tp_integrador_biblioteca.entity.Estado;
 import ar.edu.undec.tp_integrador_biblioteca.entity.Libros;
 import ar.edu.undec.tp_integrador_biblioteca.exception.ConflictException;
 import ar.edu.undec.tp_integrador_biblioteca.exception.ResourceNotFoundException;
@@ -13,21 +12,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static ar.edu.undec.tp_integrador_biblioteca.service.PrestamosService.ESTADOS_NO_FINALES;
+
 @Service
 @RequiredArgsConstructor
 public class LibrosService {
     private final LibrosRepository librosRepository;
 
     public List<LibrosResponse> getAll(boolean disponible) {
-        List<Libros> libros;
+        List<Libros> libros = disponible
+                ? librosRepository.getAllLibrosSinPrestamosEnEstados(ESTADOS_NO_FINALES)
+                : librosRepository.findAll();
 
-        if (disponible){
-            libros = librosRepository.getAllLibrosByEstado(Estado.ACTIVO);
-        } else {
-            libros = librosRepository.findAll();
-        }
-
-        return libros.stream().map(this::mapToDto).toList();
+        return libros.stream()
+                .map(this::mapToDto)
+                .toList();
     }
 
     public LibrosResponse getById(Long id) {

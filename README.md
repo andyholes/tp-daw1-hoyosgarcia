@@ -54,7 +54,7 @@ Estados del préstamo: `ACTIVO → DEVUELTO | VENCIDO` · `VENCIDO → DEVUELTO`
 | Método | Ruta                            | Descripción                                                               | Respuestas |
 |--------|---------------------------------|---------------------------------------------------------------------------|---|
 | POST   | /api/prestamos                  | Registrar el prestamo de un libro                                         | 200, 400, 404, 409 |
-| GET    | /api/prestamos                  | Obtener prestamos activos y vencidos                                      | 200 |
+| GET    | /api/prestamos                  | Obtener todos los prestamos                                               | 200 |
 | GET    | /api/prestamos?estado=ACTIVO    | Filtrar prestamos por estado activo                                       | 200 |
 | GET    | /api/prestamos/{id}             | Buscar un prestamo                                                        | 200, 400, 404 |
 | PATCH  | /api/prestamos/{id}/estado      | Cambiar el estado                                                         | 200, 400, 404, 409 |
